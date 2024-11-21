@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.com/dgmaths9/gales:
+      branch: main
+      repo: https://gitlab.com/dgmaths9/gales.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.com/dgmaths9/gales git:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-champagne-tortoise.sh
+        container: qc.acc_snazzy-turquoise-gopher
+  QC.Doc:
+    repos:
+      gitlab.com/dgmaths9/gales find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-vermilion-boar.sh
+        container: qc.doc_blurry-zucchini-slug
+      gitlab.com/dgmaths9/gales git:
+        commands:
+        - /usr/bin/env sh .sqa/script.wheezy-linen-deer.sh
+        container: qc.doc_baggy-blue-spitz
+      gitlab.com/dgmaths9/gales markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-smalt-eagle.sh
+        container: qc.doc_skanky-chartreuse-chimpanzee
+  QC.Lic:
+    repos:
+      gitlab.com/dgmaths9/gales licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-zucchini-woodpecker.sh
+        container: qc.lic_wiggy-jade-rottweiler
+  QC.Sec:
+    repos:
+      gitlab.com/dgmaths9/gales bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-cornflower-monkey.sh
+        container: qc.sec_dorky-brown-dodo
+  QC.Sty:
+    repos:
+      gitlab.com/dgmaths9/gales flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-jade-zorse.sh
+        container: qc.sty_ready-mustard-discus
+      gitlab.com/dgmaths9/gales oclint:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-cobalt-dolphin.sh
+        container: qc.sty_grumpy-tan-mandrill
+  QC.Uni:
+    repos:
+      gitlab.com/dgmaths9/gales pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-turquoise-giraffe.sh
+        container: qc.uni_beady-mauve-peccary
+  QC.Ver:
+    repos:
+      gitlab.com/dgmaths9/gales get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.pasty-pumpkin-echidna.sh
+        container: qc.ver_bumpy-tomato-crab
+timeout: 5400
